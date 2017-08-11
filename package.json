@@ -1,0 +1,33 @@
+{
+  "name": "dissipate",
+  "version": "0.1.0",
+  "description": "Co-op game where you must not lose your heat.",
+  "main": "build/public/dissipate.js",
+  "scripts": {
+    "start": "tsc && webpack-dev-server --hot",
+    "build": "tsc && webpack --watch",
+    "prod": "tsc && webpack -p",
+    "test": "cd tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShadySolutions/Dissipate.git"
+  },
+  "keywords": [
+    "dissipate"
+  ],
+  "author": "HHD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShadySolutions/Dissipate/issues"
+  },
+  "homepage": "https://github.com/ShadySolutions/Dissipate#readme",
+  "devDependencies": {
+    "typescript": "^2.4.2",
+    "webpack": "^3.5.3",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "ts-loader": "^2.3.2"
+  }
+}
