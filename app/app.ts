@@ -1,3 +1,6 @@
-import Engineer from "engineer-js";
+import Engineer from "./Engineer";
 
-console.log(Engineer.Engine.Settings.Version);
+import { GameLogic } from "./GameLogic";
+
+let GL:GameLogic = new GameLogic();
+GL.Run();
