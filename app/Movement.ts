@@ -4,6 +4,7 @@ import Engineer from "./Engineer";
 
 import { GameScene } from "./GameScene";
 import { Player, PlayerKeyPress } from "./Player";
+import { Mechanics } from "./Mechanics";
 
 class Movement
 {
@@ -13,12 +14,13 @@ class Movement
     private _Scene:GameScene;
     private _Colliders:any[];
     private _Moveables:any[];
-    //Mechanics
+    private _Mechanics:Mechanics;
     public constructor(Player1:Player, Player2:Player, Scene:GameScene)
     {
         this._MoveSpeed = 5;
         this._Players = [Player1, Player2];
         this._Scene = Scene;
+        this._Mechanics = new Mechanics(Player1, Player2, Scene);
         this._Colliders = [];
         this._Moveables = this._Scene.GetObjectsWithData("Moveable");
     }
@@ -55,6 +57,7 @@ class Movement
             if(this._PlayersKeys[i].Right) this.TryMovement(this._Players[i], "Right", new Engineer.Math.Vertex(+this._MoveSpeed, 0, 0));
             this._Players[i].Data["Glow"].Update();
         }
+        this._Mechanics.Update();
     }
     private TryMovement(Player:Player, Direction:string, Movement:any)
     {
@@ -75,7 +78,7 @@ class Movement
     }
     private CalculateCollisions()
     {
-        this._Colliders = this._Scene.GetObjectsWithData("Collision");
+        this._Colliders = this._Scene.GetObjectsWithData("Solid", true);
         for(let i = 0; i < this._Players.length; i++)
         {
             this.CalculateObjectCollisions("Solid", this._Players[i], this._Colliders);
@@ -100,8 +103,8 @@ class Movement
         for(let i = 0; i < Colliders.length; i++)
         {
             if(Object.ID == Colliders[i].ID) continue;
-            let Collider1 = this.CreateColliderObject(Object);
-            let Collider2 = this.CreateColliderObject(Colliders[i]);
+            let Collider1 = Movement.CreateColliderObject(Object);
+            let Collider2 = Movement.CreateColliderObject(Colliders[i]);
             let Collision = Engineer.Math.Collision.Check(Collider1, Collider2);
             if(Collision.Collision)
             {
@@ -114,7 +117,7 @@ class Movement
             }
         }
     }
-    private CreateColliderObject(Object:any) : any
+    public static CreateColliderObject(Object:any) : any
     {
         let Collider = new Engineer.Math.ColliderObject();
         Collider.Position = Object.Trans.Translation;

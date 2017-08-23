@@ -1,9 +1,11 @@
 export { GameScene };
 
 import Engineer from "./Engineer";
+import * as Level from "./Levels/Levels";
 
 import { LocalSettings } from "./LocalSettings";
 import { Player } from "./Player";
+import { Movement } from "./Movement";
 
 class GameScene extends Engineer.Engine.Scene2D
 {
@@ -12,6 +14,7 @@ class GameScene extends Engineer.Engine.Scene2D
     private _BackColorValue:number;
     private _Player1:Player;
     private _Player2:Player;
+    private _Movement:Movement;
     public constructor()
     {
         super();
@@ -26,8 +29,8 @@ class GameScene extends Engineer.Engine.Scene2D
         this.Trans.Scale = new Engineer.Math.Vertex(Runner.Height * 2 / 1080, Runner.Height * 2 / 1080, 1);
         this._Player1 = new Player(1);
         this._Player2 = new Player(2);
-        //Level.Generate
-        //Movement
+        Level.LevelGenerator.Generate(this, 0);
+        this._Movement = new Movement(this._Player1, this._Player2, this);
         //ZoomManager
         this.Events.KeyPress.push(this.KeyPress);
     }

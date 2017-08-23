@@ -15,4 +15,8 @@ class Mechanics
         this._Players = [Player1, Player2];
         this._Scene = Scene;
     }
+    public Update()
+    {
+        
+    }
 }

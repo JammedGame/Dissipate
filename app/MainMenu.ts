@@ -49,9 +49,8 @@ class MainMenu extends Engineer.Engine.Scene2D
     }
     public PlayClick(G:any, Args:any)
     {
-        console.log("Play!");
-        //let Runner:any = this.Data["Runner"];
-        //Runner.SwitchScene("LevelPicker", false);
+        let Runner:any = this.Data["Runner"];
+        Runner.SwitchScene("GameScene", false);
     }
     public QuitClick(G:any, Args:any)
     {
