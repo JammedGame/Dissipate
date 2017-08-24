@@ -19,10 +19,14 @@ class Movement
     {
         this._MoveSpeed = 5;
         this._Players = [Player1, Player2];
+        this._PlayersKeys = [new PlayerKeyPress(), new PlayerKeyPress()];
         this._Scene = Scene;
         this._Mechanics = new Mechanics(Player1, Player2, Scene);
         this._Colliders = [];
         this._Moveables = this._Scene.GetObjectsWithData("Moveable");
+        this._Scene.Events.KeyDown.push(this.KeyDown.bind(this));
+        this._Scene.Events.KeyUp.push(this.KeyUp.bind(this));
+        this._Scene.Events.TimerTick.push(this.GameUpdate.bind(this));
     }
     private KeyDown(G:any, Args:any)
     {
@@ -55,7 +59,7 @@ class Movement
             if(this._PlayersKeys[i].Down) this.TryMovement(this._Players[i], "Bottom", new Engineer.Math.Vertex(0, +this._MoveSpeed, 0));
             if(this._PlayersKeys[i].Left) this.TryMovement(this._Players[i], "Left", new Engineer.Math.Vertex(-this._MoveSpeed, 0, 0));
             if(this._PlayersKeys[i].Right) this.TryMovement(this._Players[i], "Right", new Engineer.Math.Vertex(+this._MoveSpeed, 0, 0));
-            this._Players[i].Data["Glow"].Update();
+            //this._Players[i].Data["Glow"].Update();
         }
         this._Mechanics.Update();
     }
@@ -74,6 +78,7 @@ class Movement
                 else Able = false;
             }
             if (Able) Player.Trans.Translation = new Engineer.Math.Vertex(Player.Trans.Translation.X + Movement.X, Player.Trans.Translation.Y + Movement.Y, 0);
+            Player.Modified = true;
         }
     }
     private CalculateCollisions()
@@ -122,7 +127,8 @@ class Movement
         let Collider = new Engineer.Math.ColliderObject();
         Collider.Position = Object.Trans.Translation;
         Collider.Scale= Object.Trans.Scale;
-        Collider.Type = Object.Data["CollisionType"];
+        Collider.Type = Object.Data["Collision"];
+        return Collider;
     }
     private CombineCollisionValues(CollisionValue1:any, CollisionValue2:any) : any
     {
@@ -132,5 +138,6 @@ class Movement
         NewCollisionValue.Top = CollisionValue1.Top || CollisionValue2.Top;
         NewCollisionValue.Left = CollisionValue1.Left || CollisionValue2.Left;
         NewCollisionValue.Right = CollisionValue1.Right || CollisionValue2.Right;
+        return NewCollisionValue;
     }
 }

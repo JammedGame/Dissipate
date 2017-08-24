@@ -27,9 +27,9 @@ class GameScene extends Engineer.Engine.Scene2D
         let Runner:any = this.Data["Runner"];
         let DesiredLevel:string = this.Data["DesiredLevel"];
         this.Trans.Scale = new Engineer.Math.Vertex(Runner.Height * 2 / 1080, Runner.Height * 2 / 1080, 1);
-        this._Player1 = new Player(1);
-        this._Player2 = new Player(2);
         Level.LevelGenerator.Generate(this, 0);
+        this._Player1 = this.Data["Player1"];
+        this._Player2 = this.Data["Player2"];
         this._Movement = new Movement(this._Player1, this._Player2, this);
         //ZoomManager
         this.Events.KeyPress.push(this.KeyPress);
@@ -54,11 +54,11 @@ class GameScene extends Engineer.Engine.Scene2D
         let Objects:any[] = [];
         for(let i = 0; i < this.Objects.length; i++)
         {
-            if(this.Objects[Key])
+            if(this.Objects[i].Data[Key])
             {
                 if(Data)
                 {
-                    if(this.Objects[Key] == Data) Objects.push(this.Objects[i]);
+                    if(this.Objects[i].Data[Key] == Data) Objects.push(this.Objects[i]);
                 }
                 else Objects.push(this.Objects[i]);
             }

@@ -50,13 +50,12 @@ class MainMenu extends Engineer.Engine.Scene2D
     public PlayClick(G:any, Args:any)
     {
         let Runner:any = this.Data["Runner"];
-        Runner.SwitchScene("GameScene", false);
+        Runner.SwitchScene("LevelPicker", false);
     }
     public QuitClick(G:any, Args:any)
     {
-        console.log("Quit!");
-        //let Runner:any = this.Data["Runner"];
-        //Runner.Close();
+        let Runner:any = this.Data["Runner"];
+        Runner.Close();
     }
     public Resize(G:any, Args:any)
     {

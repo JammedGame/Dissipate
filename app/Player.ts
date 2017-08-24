@@ -12,8 +12,12 @@ class Player extends Engineer.Engine.Sprite
         super();
         this.Name = "Player" + Num;
         this.Trans.Scale = new Engineer.Math.Vertex(50, 50, 0);
-        this.SpriteSets[0].Sprites.push("/build/resources/orb_01.png");
+        let SpriteSet:any = new Engineer.Engine.SpriteSet(null,"Default");
+        SpriteSet.Sprites = [];
+        this.SpriteSets = [SpriteSet];
+        this.SpriteSets[0].Sprites.push("/build/resources/orb.png");
         this.Data["Player"] = true;
+        this.Data["Collision"] = Engineer.Math.CollisionType.Radius2D;
         this._Num = Num;
         this._Heat = 100;
         this._MaxHeat = 100;
