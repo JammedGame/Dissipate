@@ -25,8 +25,8 @@ class Lever extends Switch
         let Players:Player[] = this._Scene.GetObjectsWithData("Player");
         for(let i = 0; i < Players.length; i++)
         {
-            let Collider1 = Movement.CreateColliderObject(Player[i]);
-            let Collider2 = Movement.CreateColliderObject(this);
+            let Collider1 = Engineer.Util.Collision.CreateColliderObject(Player[i]);
+            let Collider2 = Engineer.Util.Collision.CreateColliderObject(this);
             let Collision = Engineer.Math.Collision.Check(Collider1, Collider2);
             if(Collision.Collision) this._Activated = true;
         }

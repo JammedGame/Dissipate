@@ -20,7 +20,7 @@ class GameScene extends Engineer.Engine.Scene2D
         super();
         this.Name = "GameScene";
         this.BackColor = Engineer.Math.Color.FromRGBA(0,0,0,255);
-        this.Events.TimerTick.push();
+        this.Events.TimeTick.push(this.ColorUpdates);
     }
     public Init() : void
     {
@@ -48,21 +48,5 @@ class GameScene extends Engineer.Engine.Scene2D
         this.BackColor = Engineer.Math.Color.FromRGBA((104 * (this._BackColorValue / 100.0)), (58 * (this._BackColorValue / 100.0)), (94 * (this._BackColorValue / 100.0)), 255);
         if (this._BackColorValue == 100) this._BackColorChange = -1;
         if (this._BackColorValue == 0) this._BackColorChange = +1;
-    }
-    public GetObjectsWithData(Key:string, Data?:any) : any[]
-    {
-        let Objects:any[] = [];
-        for(let i = 0; i < this.Objects.length; i++)
-        {
-            if(this.Objects[i].Data[Key])
-            {
-                if(Data)
-                {
-                    if(this.Objects[i].Data[Key] == Data) Objects.push(this.Objects[i]);
-                }
-                else Objects.push(this.Objects[i]);
-            }
-        }
-        return Objects;
     }
 }
