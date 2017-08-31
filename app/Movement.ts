@@ -59,7 +59,6 @@ class Movement
             if(this._PlayersKeys[i].Down) this.TryMovement(this._Players[i], "Bottom", new Engineer.Math.Vertex(0, +this._MoveSpeed, 0));
             if(this._PlayersKeys[i].Left) this.TryMovement(this._Players[i], "Left", new Engineer.Math.Vertex(-this._MoveSpeed, 0, 0));
             if(this._PlayersKeys[i].Right) this.TryMovement(this._Players[i], "Right", new Engineer.Math.Vertex(+this._MoveSpeed, 0, 0));
-            //this._Players[i].Data["Glow"].Update();
         }
         this._Mechanics.Update();
     }

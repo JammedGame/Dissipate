@@ -32,14 +32,19 @@ class LevelGenerator
             }
         }
         ColliderGenerator.Generate(Scene, LevelData);
-        let Player1 = new Player(1);
+        let Player1 = new Player(1, Scene);
         Player1.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player1.X * FieldSize, LevelData.Player1.Y * FieldSize, 0);
         Scene.AddSceneObject(Player1);
         Scene.Data["Player1"] = Player1;
-        let Player2 = new Player(2);
+        let Player2 = new Player(2, Scene);
         Player2.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player2.X * FieldSize, LevelData.Player2.Y * FieldSize, 0);
         Scene.AddSceneObject(Player2);
         Scene.Data["Player2"] = Player2;
         Engineer.Util.Log.Print(Scene);
+        console.log(Scene);
+    }
+    private static GenerateElements()
+    {
+
     }
 }

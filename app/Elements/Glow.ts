@@ -13,11 +13,15 @@ class Glow extends Engineer.Engine.Tile
         this._Size = Size;
         this.Paint = Color;
         this.Name = Parent.Name + "_Glow";
+        this.Data["Glow"] = true;
         let Tiles:any = new Engineer.Engine.TileCollection(null, ["/build/resources/orb.png"])
         this.Collection = Tiles;
+        this.Index = 0;
+        this.Trans.Scale = new Engineer.Math.Vertex(Size, Size, 1);
+        this.Update();
     }
     public Update() : void
     {
-        this.Trans.Translation = new Engineer.Math.Vertex(this._Parent.Trans.Translation.X - this._Size / 2 + this._Parent.Trans.Scale.X / 2, this._Parent.Trans.Translation.Y - this._Size / 2 + this._Parent.Trans.Scale.Y / 2, 0)
+        this.Trans.Translation = new Engineer.Math.Vertex(this._Parent.Trans.Translation.X, this._Parent.Trans.Translation.Y, 0)
     }
 }

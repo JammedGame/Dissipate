@@ -2,12 +2,16 @@ export { Player, PlayerKeyPress };
 
 import Engineer from "./Engineer";
 
+import { GameScene } from "./GameScene";
+import { Glow } from "./Elements/Glow";
+
 class Player extends Engineer.Engine.Sprite
 {
     private _Num:number;
     private _Heat:number;
     private _MaxHeat:number;
-    public constructor(Num:number)
+    private _Glow:Glow;
+    public constructor(Num:number, Scene:GameScene)
     {
         super();
         this.Name = "Player" + Num;
@@ -21,10 +25,17 @@ class Player extends Engineer.Engine.Sprite
         this._Num = Num;
         this._Heat = 100;
         this._MaxHeat = 100;
+        this._Glow = new Glow(this, 300, Engineer.Math.Color.FromRGBA(255,0,0,125));
+        Scene.Objects.splice(0, 0, this._Glow);
+        Scene.Data[this._Glow.Name] = this._Glow;
     }
     private UpdatePlayer(G:any, Args:any)
     {
         
+    }
+    public Reset()
+    {
+
     }
     public MovementRate() : number
     {
