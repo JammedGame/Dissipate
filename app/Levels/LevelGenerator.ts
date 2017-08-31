@@ -10,9 +10,9 @@ import { Player } from "./../Player";
 
 class LevelGenerator
 {
+    private static _FieldSize:number = 100;
     public static Generate(Scene:GameScene, Level:number) : void
     {
-        let FieldSize = 100;
         let Collection:any = new Engineer.Engine.TileCollection();
         for(let i = 0; i < 11; i++) Collection.Images.push("/build/resources/tile_"+i+".png");
         let LevelData:any = JSON.parse(LevelList.Levels[Level]);
@@ -27,24 +27,30 @@ class LevelGenerator
                 //NewTile.Data["Solid"] = true;
                 NewTile.Data["Collision"] = Engineer.Math.CollisionType.Rectangular2D;
                 NewTile.Trans.Scale = new Engineer.Math.Vertex(100,100,0);
-                NewTile.Trans.Translation = new Engineer.Math.Vertex(j * FieldSize, i * FieldSize, 0);
+                NewTile.Trans.Translation = new Engineer.Math.Vertex(j * LevelGenerator._FieldSize, i * LevelGenerator._FieldSize, 0);
                 Scene.AddSceneObject(NewTile);
             }
         }
         ColliderGenerator.Generate(Scene, LevelData);
         let Player1 = new Player(1, Scene);
-        Player1.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player1.X * FieldSize, LevelData.Player1.Y * FieldSize, 0);
+        Player1.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player1.X * LevelGenerator._FieldSize, LevelData.Player1.Y * LevelGenerator._FieldSize, 0);
         Scene.AddSceneObject(Player1);
         Scene.Data["Player1"] = Player1;
         let Player2 = new Player(2, Scene);
-        Player2.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player2.X * FieldSize, LevelData.Player2.Y * FieldSize, 0);
+        Player2.Trans.Translation = new Engineer.Math.Vertex(LevelData.Player2.X * LevelGenerator._FieldSize, LevelData.Player2.Y * LevelGenerator._FieldSize, 0);
         Scene.AddSceneObject(Player2);
         Scene.Data["Player2"] = Player2;
         Engineer.Util.Log.Print(Scene);
-        console.log(Scene);
+        LevelGenerator.GenerateElements(Scene, LevelData.Elements);
     }
-    private static GenerateElements()
+    private static GenerateElements(Scene:GameScene, ListedElements:any[])
     {
-
+        for(let i = 0; i < ListedElements.length; i++)
+        {
+            let NewElement:any;
+            if(ListedElements[i].Type == "HeatSource") NewElement = new Elements.HeatSource(Scene, ListedElements[i].Range);
+            if(ListedElements[i].Type == "Exit") NewElement = new Elements.Exit(Scene);
+            NewElement.Trans.Translation = new Engineer.Math.Vertex(ListedElements[i].X * LevelGenerator._FieldSize, ListedElements[i].Y * LevelGenerator._FieldSize, 0);
+        }
     }
 }

@@ -25,9 +25,7 @@ class Player extends Engineer.Engine.Sprite
         this._Num = Num;
         this._Heat = 100;
         this._MaxHeat = 100;
-        this._Glow = new Glow(this, 300, Engineer.Math.Color.FromRGBA(255,0,0,125));
-        Scene.Objects.splice(0, 0, this._Glow);
-        Scene.Data[this._Glow.Name] = this._Glow;
+        this._Glow = new Glow(Scene, this, 300, Engineer.Math.Color.FromRGBA(255,0,0,125));
     }
     private UpdatePlayer(G:any, Args:any)
     {

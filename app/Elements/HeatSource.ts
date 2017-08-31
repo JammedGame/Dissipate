@@ -15,8 +15,8 @@ class HeatSource extends Element
         super(Scene);
         this._Range = 300;
         if(Range) this._Range = Range;
-        this._Glow = new Glow(this, this._Range, Engineer.Math.Color.FromRGBA(204, 0, 0, 150));
-        this.Data["SpriteSet"].Sprites.push("/build/resources/menu_bck.png");
+        this._Glow = new Glow(Scene, this, this._Range, Engineer.Math.Color.FromRGBA(204, 0, 0, 150));
+        this.Data["SpriteSet"].Sprites = ["/build/resources/heat_0.png","/build/resources/heat_1.png","/build/resources/heat_2.png","/build/resources/heat_3.png"];
         this.Data["HeatSource"] = true;
         this.Data["Static"] = true;
         this.Data["Collision"] = Engineer.Math.CollisionType.Rectangular2D;

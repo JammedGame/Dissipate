@@ -2,11 +2,13 @@ export { Glow };
 
 import Engineer from "./../Engineer";
 
+import { GameScene } from "./../GameScene";
+
 class Glow extends Engineer.Engine.Tile
 {
     private _Size:number;
     private _Parent:any;
-    public constructor(Parent:any, Size:number, Color:any)
+    public constructor(Scene:GameScene, Parent:any, Size:number, Color:any)
     {
         super();
         this._Parent = Parent;
@@ -19,6 +21,8 @@ class Glow extends Engineer.Engine.Tile
         this.Index = 0;
         this.Trans.Scale = new Engineer.Math.Vertex(Size, Size, 1);
         this.Update();
+        Scene.Objects.splice(0, 0, this);
+        Scene.Data[this.Name] = this;
     }
     public Update() : void
     {

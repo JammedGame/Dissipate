@@ -15,7 +15,7 @@ class ColdSource extends Element
         super(Scene);
         this._Range = 300;
         if(Range) this._Range = Range;
-        this._Glow = new Glow(this, this._Range, Engineer.Math.Color.FromRGBA(65, 105, 205, 150));
+        this._Glow = new Glow(Scene, this, this._Range, Engineer.Math.Color.FromRGBA(65, 105, 205, 150));
         this.Data["SpriteSet"].Sprites.push("/build/resources/menu_bck.png");
         this.Data["ColdSource"] = true;
         this.Data["Static"] = true;
