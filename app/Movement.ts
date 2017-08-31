@@ -17,7 +17,6 @@ class Movement
     private _Mechanics:Mechanics;
     public constructor(Player1:Player, Player2:Player, Scene:GameScene)
     {
-        this._MoveSpeed = 5;
         this._Players = [Player1, Player2];
         this._PlayersKeys = [new PlayerKeyPress(), new PlayerKeyPress()];
         this._Scene = Scene;
@@ -55,10 +54,11 @@ class Movement
         this.CalculateCollisions();
         for(let i = 0; i < this._Players.length; i++)
         {
-            if(this._PlayersKeys[i].Up) this.TryMovement(this._Players[i], "Top", new Engineer.Math.Vertex(0, -this._MoveSpeed, 0));
-            if(this._PlayersKeys[i].Down) this.TryMovement(this._Players[i], "Bottom", new Engineer.Math.Vertex(0, +this._MoveSpeed, 0));
-            if(this._PlayersKeys[i].Left) this.TryMovement(this._Players[i], "Left", new Engineer.Math.Vertex(-this._MoveSpeed, 0, 0));
-            if(this._PlayersKeys[i].Right) this.TryMovement(this._Players[i], "Right", new Engineer.Math.Vertex(+this._MoveSpeed, 0, 0));
+            let MoveSpeed:number = this._Players[i].MovementRate();
+            if(this._PlayersKeys[i].Up) this.TryMovement(this._Players[i], "Top", new Engineer.Math.Vertex(0, -MoveSpeed, 0));
+            if(this._PlayersKeys[i].Down) this.TryMovement(this._Players[i], "Bottom", new Engineer.Math.Vertex(0, +MoveSpeed, 0));
+            if(this._PlayersKeys[i].Left) this.TryMovement(this._Players[i], "Left", new Engineer.Math.Vertex(-MoveSpeed, 0, 0));
+            if(this._PlayersKeys[i].Right) this.TryMovement(this._Players[i], "Right", new Engineer.Math.Vertex(+MoveSpeed, 0, 0));
         }
         this._Mechanics.Update();
     }

@@ -10,6 +10,7 @@ class ColdSource extends Element
 {
     private _Range:number;
     private _Glow:Glow;
+    public get Glow():Glow { return this._Glow; }
     public constructor(Scene:GameScene, Range?:number)
     {
         super(Scene);

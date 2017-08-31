@@ -16,6 +16,7 @@ class Glow extends Engineer.Engine.Tile
         this.Paint = Color;
         this.Name = Parent.Name + "_Glow";
         this.Data["Glow"] = true;
+        this.Data["Collision"] = Engineer.Math.CollisionType.Radius2D;
         let Tiles:any = new Engineer.Engine.TileCollection(null, ["/build/resources/orb.png"])
         this.Collection = Tiles;
         this.Index = 0;
@@ -26,6 +27,6 @@ class Glow extends Engineer.Engine.Tile
     }
     public Update() : void
     {
-        this.Trans.Translation = new Engineer.Math.Vertex(this._Parent.Trans.Translation.X, this._Parent.Trans.Translation.Y, 0)
+        this.Trans.Translation = new Engineer.Math.Vertex(this._Parent.Trans.Translation.X, this._Parent.Trans.Translation.Y, 0);
     }
 }
