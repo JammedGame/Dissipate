@@ -1,6 +1,6 @@
 export { Switch };
 
-import Engineer from "./../Engineer";
+import * as TBX from "toybox-engine";
 
 import { Element } from "./Element";
 import { GameScene } from "./../GameScene";

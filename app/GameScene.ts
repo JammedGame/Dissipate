@@ -1,13 +1,14 @@
 export { GameScene };
 
-import Engineer from "./Engineer";
+import * as TBX from "toybox-engine";
 import * as Level from "./Levels/Levels";
 
-import { LocalSettings } from "./LocalSettings";
 import { Player } from "./Player";
 import { Movement } from "./Movement";
+import { LocalSettings } from "./LocalSettings";
 
-class GameScene extends Engineer.Engine.Scene2D
+
+class GameScene extends TBX.Scene2D
 {
     private _Seed:number;
     private _BackColorChange:number;
@@ -19,8 +20,8 @@ class GameScene extends Engineer.Engine.Scene2D
     {
         super();
         this.Name = "GameScene";
-        this.BackColor = Engineer.Math.Color.FromRGBA(0,0,0,255);
-        this.Events.TimeTick.push(this.ColorUpdates);
+        this.BackColor = TBX.Color.FromRGBA(0,0,0,255);
+        this.Events.Update.push(this.ColorUpdates);
     }
     public Init() : void
     {
